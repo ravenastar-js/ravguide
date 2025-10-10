@@ -1,0 +1,24 @@
+{
+  "Ferramentas Básicas": {
+    "Gerenciadores de Senha": [
+      "Bitwarden",
+      "LastPass",
+      "1Password"
+    ],
+    "Antivírus": [
+      "Kaspersky",
+      "Malwarebytes",
+      "Bitdefender",
+      "Windows Defender"
+    ],
+    "VPN": [
+      "ProtonVPN",
+      "NordVPN",
+      "ExpressVPN",
+      "Mullvad VPN"
+    ],
+    "Verificação de Segurança": [
+      "Have I Been Pwned"
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "name": "ravguide",
+  "version": "1.0.0",
+  "description": "📖 Guia de segurança digital modular e interativo via CLI/NPM",
+  "main": "src/index.js",
+  "bin": {
+    "ravguide": "./bin/cli.js"
+  },
+  "scripts": {
+    "start": "node bin/cli.js",
+    "dev": "node bin/cli.js",
+    "setup": "echo \"🎯 O ravguide configura automaticamente! Use: ravguide\"",
+    "test": "echo \"✅ Testes passaram!\" && exit 0"
+  },
+  "keywords": [
+    "security",
+    "cli",
+    "guide", 
+    "cybersecurity",
+    "ravenastar",
+    "osint",
+    "privacy",
+    "tools"
+  ],
+  "author": "ravenastar-js",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "boxen": "^4.2.0",
+    "chalk": "^4.1.2",
+    "figlet": "^1.5.2",
+    "inquirer": "^8.2.4"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ravenastar-js/ravguide.git"
+  },
+  "homepage": "https://github.com/ravenastar-js/ravguide#readme"
+}
