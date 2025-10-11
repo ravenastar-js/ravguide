@@ -92,8 +92,12 @@ function createCompactBanner() {
     const version = getVersion();
     const width = getResponsiveWidth(50, 35, 60);
 
+    const bannerText = colors.action(
+        figlet.textSync('ravguide', { font: 'Standard', horizontalLayout: 'default' })
+    );
+
     const content = [
-        colors.action('📖  ravguide'),
+        bannerText,
         colors.subtitle('Guia de Segurança Digital via CLI/NPM'),
         '',
         colors.highlight2(`🌱 v${version}`),
