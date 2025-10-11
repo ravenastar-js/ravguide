@@ -5,7 +5,7 @@
       "LastPass",
       "1Password"
     ],
-    "Antivírus": [
+    "Antivírus e Segurança": [
       "Kaspersky",
       "Malwarebytes",
       "Bitdefender",
@@ -13,12 +13,22 @@
     ],
     "VPN": [
       "ProtonVPN",
+      "Mullvad VPN",
       "NordVPN",
-      "ExpressVPN",
-      "Mullvad VPN"
+      "ExpressVPN"
     ],
     "Verificação de Segurança": [
-      "Have I Been Pwned"
+      "Have I Been Pwned",
+      "Intelx.io",
+      "urlscan.io",
+      "siteconfiavel.com.br",
+      "urldna.io",
+      "virustotal.com",
+      "tria.ge"
+    ],
+    "Autenticação de Dois Fatores (2FA)": [
+      "Microsoft Authenticator",
+      "Google Authenticator"
     ]
   }
 }

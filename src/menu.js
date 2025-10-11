@@ -22,6 +22,7 @@ let categories = []; // 📋 Cache de categorias para performance
  */
 async function waitForInput() {
     const isMobile = isMobileDevice();
+    
     await inquirer.prompt([{
         type: 'input',
         name: 'continue',
@@ -74,7 +75,9 @@ async function showMainMenu() {
         message: isMobile ? '📚 Selecione:' : '📚 Selecione uma categoria:',
         choices: choices,
         pageSize: isMobile ? 8 : 12,
-        loop: false
+        loop: false,
+        validate: () => true,
+        transformer: () => '',
     }]);
 
     selectedCategory === 'exit'
@@ -131,7 +134,6 @@ async function showToolsSubmenu(toolsData) {
         return showMainMenu();
     }
 
-
     categories.forEach((cat, index) => {
         // 🎯 Calcular número de ferramentas corretamente para diferentes estruturas
         const categoryData = toolsData[cat];
@@ -181,8 +183,8 @@ async function showToolsSubmenu(toolsData) {
             choices: choices,
             pageSize: isMobile ? 8 : 12,
             loop: false,
-            validate: () => true, 
-            transformer: () => '', 
+        validate: () => true,
+        transformer: () => '',
         }
     ]);
 
@@ -248,7 +250,9 @@ async function showBasicToolsSubcategories(categoryName, subcategories, allTools
         message: isMobile ? '📂 Selecione a subcategoria:' : `📂 ${categoryName} - Selecione uma subcategoria:`,
         choices: choices,
         pageSize: isMobile ? 8 : 12,
-        loop: false
+        loop: false,
+        validate: () => true,
+        transformer: () => '',
     }]);
 
     if (selectedSubcategory === 'back') {
@@ -292,7 +296,9 @@ async function showBasicToolsList(categoryName, subcategoryName, tools, allTools
             { name: isMobile ? '❌ Sair' : '❌ Sair', value: 'exit' }
         ],
         pageSize: 4,
-        loop: false
+        loop: false,
+        validate: () => true,
+        transformer: () => '',
     }]);
 
     // 🎯 Lidar com a ação manualmente
@@ -345,7 +351,9 @@ async function showToolsList(categoryName, tools, allToolsData) {
         { name: isMobile ? '🛠️ Outra categoria' : '🛠️ Ver outra categoria', value: 'another_category' },
         { name: isMobile ? '↩️ Voltar' : '↩️ Voltar ao menu principal', value: 'back' }],
         pageSize: isMobile ? 8 : 12,
-        loop: false
+        loop: false,
+        validate: () => true,
+        transformer: () => '',
     }]);
 
     if (selectedTool === 'back') {
@@ -383,7 +391,9 @@ async function showToolDetails(tool, categoryName, allToolsData) {
             { name: isMobile ? '❌ Sair' : '❌ Sair', value: 'exit' }
         ],
         pageSize: isMobile ? 5 : 8,
-        loop: false
+        loop: false,
+        validate: () => true,
+        transformer: () => '',
     }]);
 
     // 🎯 Lidar com a ação manualmente
@@ -469,7 +479,9 @@ async function showPaginatedPlatforms(platforms, platformsData) {
             message: `🏢 Plataformas (Página ${currentPage + 1}/${totalPages}):`,
             choices: paginationChoices,
             pageSize: isMobile ? 8 : 12,
-            loop: false
+            loop: false,
+        validate: () => true,
+        transformer: () => '',
         }]);
 
         // 🎯 Primeiro verificar ações de navegação
@@ -521,7 +533,9 @@ async function showPlatformSelection(platforms, platformsData) {
         message: isMobile ? '🏢 Selecione a plataforma:' : '🏢 Selecione uma plataforma:',
         choices: choices,
         pageSize: isMobile ? 8 : 12,
-        loop: false
+        loop: false,
+        validate: () => true,
+        transformer: () => '',
     }]);
 
     // 🎯 Primeiro verificar ações de navegação
@@ -585,7 +599,9 @@ async function showPlatformDetails(platformInfo, platformsData) {
             { name: isMobile ? '❌ Sair' : '❌ Sair', value: 'exit' }
         ],
         pageSize: 3,
-        loop: false
+        loop: false,
+        validate: () => true,
+        transformer: () => '',
     }]);
 
     // 🎯 Lidar com a ação manualmente
@@ -659,7 +675,9 @@ async function showActionMenu(currentCategory) {
         name: 'action',
         message: isMobile ? '📝 Opções:' : '📝 O que deseja fazer?',
         choices: choices,
-        loop: false
+        loop: false,
+        validate: () => true,
+        transformer: () => '',
     }]);
 
     switch (action) {

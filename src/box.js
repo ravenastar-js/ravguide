@@ -103,7 +103,7 @@ function createCompactBanner() {
         colors.subtitle('📖  Guia de Segurança Digital via CLI/NPM'),
         '',
         colors.text('Feito com ') + colors.danger('💚') + colors.text(' por ') + colors.ravenastar.bold('RavenaStar'),
-        colors.link.underline('https://ravenastar.link\n'),
+        colors.text('🔗 ') + colors.link.underline('https://ravenastar.link\n'),
         colors.text('🔒 ') + colors.link.underline('https://secguide.pages.dev'),
         '',
         colors.text('📱 Compatível com Termux'),
@@ -140,7 +140,7 @@ function createDesktopBanner() {
         colors.subtitle('📖  Guia de Segurança Digital via CLI/NPM'),
         '',
         colors.text('Feito com ') + colors.danger('💚') + colors.text(' por ') + colors.ravenastar.bold('RavenaStar'),
-        colors.link.underline('https://ravenastar.link\n'),
+        colors.text('🔗 ') + colors.link.underline('https://ravenastar.link\n'),
         colors.text('🔒 ') + colors.link.underline('https://secguide.pages.dev'),
         '',
         colors.text('📱 Compatível com Termux'),
@@ -509,7 +509,9 @@ function createMenu(choices, message = '🎯 Selecione uma opção:') {
         message: colors.option(message),
         choices: coloredChoices,
         pageSize: isMobile ? 8 : 12,
-        loop: false
+        loop: false,
+        validate: () => true,
+        transformer: () => '',
     };
 }
 

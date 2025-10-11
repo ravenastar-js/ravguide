@@ -5,7 +5,7 @@
  * 🔄 Camada de abstração sobre o sistema de boxes para interface unificada
  */
 
-const { 
+const {
     displayHeader: boxDisplayHeader,
     createStepBox,
     createSimpleContentBox,
@@ -83,13 +83,13 @@ module.exports = {
     displayHeader: boxDisplayHeader,
     displayContent,
     displayStepByStep,
-    
+
     // 📱 Utilitários de dispositivo
     isMobileDevice,
     getTerminalWidth,
 
     // 🎨 Funções de box para uso direto
-    createStepBox, 
+    createStepBox,
     createSimpleContentBox,
     createToolBox,
     createPlatformBox,

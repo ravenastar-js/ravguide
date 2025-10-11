@@ -107,6 +107,7 @@ ravguide check
 ├── ⚙️ bin/
 │   └── 🖥️ cli.js
 ├── 📚 src/
+│   ├── 🎨 box.js
 │   ├── 🎯 commands.js
 │   ├── 📥 data-loader.js
 │   ├── 🏠 index.js

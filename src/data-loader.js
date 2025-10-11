@@ -42,7 +42,6 @@ class DataLoader {
                 }
             }
 
-            console.log(`✅ Carregadas ${this.categories.size} categorias locais`);
         } catch (error) {
             console.error('❌ Erro crítico ao carregar dados locais:', error.message);
             process.exit(1);
@@ -184,7 +183,7 @@ class DataLoader {
         await this.loadLocalData();
         await this.loadRemoteData();
         this.initialized = true;
-        
+
         return this.getCategoryNames();
     }
 
