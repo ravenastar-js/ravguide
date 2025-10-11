@@ -98,11 +98,11 @@ function createCompactBanner() {
 
     const content = [
         bannerText,
-        colors.subtitle('Guia de Segurança Digital via CLI/NPM'),
-        '',
         colors.highlight2(`🌱 v${version}`),
         '',
-        colors.text('Feito com ') + colors.danger('💚') + colors.text(' por ') + colors.ravenastar('RavenaStar'),
+        colors.subtitle('📖  Guia de Segurança Digital via CLI/NPM'),
+        '',
+        colors.text('Feito com ') + colors.danger('💚') + colors.text(' por ') + colors.ravenastar.bold('RavenaStar'),
         colors.link.underline('https://ravenastar.link\n'),
         colors.text('🔒 ') + colors.link.underline('https://secguide.pages.dev'),
         '',
