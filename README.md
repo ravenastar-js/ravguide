@@ -64,6 +64,9 @@ O **SECGUIDE** é uma ferramenta de linha de comando (CLI) e NPM, que oferece gu
 <summary>📥 Como instalar o NodeJS?</summary>
 
 - [COMO INSTALAR NODE JS NO WINDOWS?](https://youtu.be/-jft_9PlffQ)
+
+![RavGuide](media/ravguide.gif)
+
 </details>
 
 ```bash
