@@ -131,7 +131,7 @@ async function showToolsSubmenu(toolsData) {
         return showMainMenu();
     }
 
-    console.log(`\n📁 Encontradas ${categories.length} categorias de ferramentas:`);
+
     categories.forEach((cat, index) => {
         // 🎯 Calcular número de ferramentas corretamente para diferentes estruturas
         const categoryData = toolsData[cat];
@@ -146,8 +146,6 @@ async function showToolsSubmenu(toolsData) {
                 return total + (Array.isArray(subArray) ? subArray.length : 0);
             }, 0);
         }
-
-        console.log(`   ${index + 1}. ${cat} (${toolCount} ferramentas)`);
     });
     console.log('');
 
