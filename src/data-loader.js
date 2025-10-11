@@ -2,6 +2,7 @@
  * 🗂️ Carregador de Dados Inteligente
  * 📥 Carrega dados locais e remotos de forma eficiente
  * 🔄 Processa e normaliza dados de múltiplas fontes
+ * 🎯 Fornece interface unificada para acesso aos dados
  */
 
 const fs = require('fs').promises;
@@ -12,11 +13,13 @@ class DataLoader {
     constructor() {
         this.dataPath = path.join(__dirname, '..', 'data');
         this.categories = new Map();
+        this.initialized = false;
     }
 
     /**
      * 📁 Carrega dados locais do diretório data/
-     * @returns {Promise<void>}
+     * @returns {Promise<void>} 📤 Promise que resolve quando os dados locais são carregados
+     * @throws {Error} 🚨 Se não encontrar arquivos JSON ou houver erro de leitura
      */
     async loadLocalData() {
         try {
@@ -27,7 +30,7 @@ class DataLoader {
                 throw new Error('Nenhum arquivo JSON encontrado no diretório data/');
             }
 
-            // 📥 Carrega cada arquivo JSON
+            // 📥 Carrega cada arquivo JSON individualmente
             for (const file of jsonFiles) {
                 try {
                     const filePath = path.join(this.dataPath, file);
@@ -47,8 +50,9 @@ class DataLoader {
     }
 
     /**
-     * 🌐 Carrega dados remotos de fontes externas
-     * @returns {Promise<void>}
+     * 🌐 Carrega dados remotos de fontes externas configuradas
+     * @returns {Promise<void>} 📤 Promise que resolve quando os dados remotos são carregados
+     * @throws {Error} 🚨 Se houver falha no carregamento de fontes remotas
      */
     async loadRemoteData() {
         const remoteSources = [
@@ -79,7 +83,7 @@ class DataLoader {
     /**
      * 🔧 Processa dados de ferramentas do JavaScript remoto
      * @param {string} rawData - Dados brutos do JavaScript
-     * @returns {Object} Dados processados das ferramentas
+     * @returns {Object} 📋 Dados processados das ferramentas organizados por categoria
      */
     processToolsData(rawData) {
         try {
@@ -92,7 +96,7 @@ class DataLoader {
             const toolsData = eval(`(${toolsDataMatch[1]})`);
             const categorizedTools = {};
 
-            // 🗂️ Categoriza ferramentas
+            // 🗂️ Categoriza ferramentas baseado no tipo
             toolsData.forEach(tool => {
                 if (!tool.id || !tool.name) return;
 
@@ -116,10 +120,10 @@ class DataLoader {
     }
 
     /**
-     * 🔗 Normaliza links de ferramentas
-     * @param {string} link - Link original
-     * @param {string} id - ID da ferramenta
-     * @returns {string} Link normalizado
+     * 🔗 Normaliza links de ferramentas para formato padrão
+     * @param {string} link - Link original da ferramenta
+     * @param {string} id - ID único da ferramenta
+     * @returns {string} 🔗 Link normalizado e padronizado
      */
     normalizeToolLink(link, id) {
         if (link === 'https://secguide.pages.dev/r/' ||
@@ -131,9 +135,9 @@ class DataLoader {
     }
 
     /**
-     * 🗂️ Mapeia categorias para nomes amigáveis
-     * @param {string} rawCategory - Categoria original
-     * @returns {string} Categoria formatada
+     * 🗂️ Mapeia categorias técnicas para nomes amigáveis e descritivos
+     * @param {string} rawCategory - Categoria original/abreviada
+     * @returns {string} 🏷️ Categoria formatada com emoji e nome descritivo
      */
     mapCategory(rawCategory) {
         const categoryMap = {
@@ -150,9 +154,9 @@ class DataLoader {
     }
 
     /**
-     * 🧹 Limpa e normaliza texto
-     * @param {string} text - Texto original
-     * @returns {string} Texto limpo
+     * 🧹 Limpa e normaliza texto removendo caracteres especiais problemáticos
+     * @param {string} text - Texto original com possíveis caracteres especiais
+     * @returns {string} 📝 Texto limpo e normalizado
      */
     cleanText(text) {
         const replacements = {
@@ -168,18 +172,25 @@ class DataLoader {
     }
 
     /**
-     * 🚀 Inicializa carregador de dados
-     * @returns {Promise<Array>} Nomes das categorias disponíveis
+     * 🚀 Inicializa carregador de dados - carrega todas as fontes
+     * @returns {Promise<Array>} 📋 Lista de nomes das categorias disponíveis
+     * @throws {Error} 🚨 Se houver falha crítica na inicialização
      */
     async initialize() {
+        if (this.initialized) {
+            return this.getCategoryNames();
+        }
+
         await this.loadLocalData();
         await this.loadRemoteData();
+        this.initialized = true;
+        
         return this.getCategoryNames();
     }
 
     /**
-     * 📋 Obtém nomes das categorias disponíveis
-     * @returns {Array} Lista de nomes de categorias
+     * 📋 Obtém nomes das categorias disponíveis de forma amigável
+     * @returns {Array} 🏷️ Lista de nomes de categorias formatados
      */
     getCategoryNames() {
         return Array.from(this.categories.entries()).map(([fileName, data]) => {
@@ -187,16 +198,22 @@ class DataLoader {
             if (fileName === 'contatos-plataformas') return fileName.replace(/-/g, ' ');
 
             const firstKey = Object.keys(data)[0];
-            return firstKey || fileName.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            return String(firstKey || fileName.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()));
         });
     }
 
     /**
      * 🔍 Obtém dados de uma categoria específica
-     * @param {string} categoryName - Nome da categoria
-     * @returns {Object} Dados da categoria
+     * @param {string} categoryName - Nome da categoria desejada
+     * @returns {Object|null} 📊 Dados da categoria ou null se não encontrada
      */
     getCategoryData(categoryName) {
+        // 🎯 Verificar se categoryName é válido
+        if (!categoryName || typeof categoryName !== 'string') {
+            console.error('❌ Nome da categoria inválido:', categoryName);
+            return null;
+        }
+
         if (categoryName.toLowerCase() === 'ferramentas osint') {
             return this.categories.get('ferramentas-osint');
         }
@@ -212,14 +229,9 @@ class DataLoader {
     }
 
     /**
-     * 🎯 Obtém categoria baseada em comando
-     * @param {string} command - Comando de busca
-     * @returns {Object|null} Dados da categoria encontrada
-     */
-    /**
-     * 🎯 Obtém categoria baseada em comando
-     * @param {string} command - Comando de busca
-     * @returns {Object|null} Dados da categoria encontrada
+     * 🎯 Obtém categoria baseada em comando/alias do usuário
+     * @param {string} command - Comando ou alias para busca
+     * @returns {Object|null} 📊 Dados da categoria encontrada ou null
      */
     getCategoryByCommand(command) {
         const normalizedCommand = command.toLowerCase().replace(/\s+/g, '-');
@@ -249,7 +261,7 @@ class DataLoader {
             }
         }
 
-        // 🔍 Busca por alias comuns
+        // 🔍 Busca por alias comuns pré-definidos
         const aliases = {
             'ferramentas': 'ferramentas-osint',
             'osint': 'ferramentas-osint',
@@ -268,8 +280,13 @@ class DataLoader {
     }
 
     /**
-     * 📊 Verifica disponibilidade de dados
-     * @returns {Promise<Object>} Status dos dados
+     * 📊 Verifica disponibilidade e status dos dados carregados
+     * @returns {Promise<Object>} 📈 Status completo dos dados disponíveis
+     * @property {boolean} hasData - Se existem dados disponíveis
+     * @property {string} message - Mensagem de status
+     * @property {Array} [instructions] - Instruções caso falte dados
+     * @property {Array} [categories] - Lista de categorias disponíveis
+     * @property {number} [total] - Total de categorias disponíveis
      */
     async checkDataAvailability() {
         try {
@@ -300,6 +317,24 @@ class DataLoader {
                 ]
             };
         }
+    }
+
+    /**
+     * 🔄 Verifica se o carregador já foi inicializado
+     * @returns {boolean} 📊 true se já foi inicializado, false caso contrário
+     */
+    isInitialized() {
+        return this.initialized;
+    }
+
+    /**
+     * 🗑️ Limpa cache e reinicializa o carregador
+     * @returns {Promise<void>} 📤 Promise que resolve quando o cache é limpo
+     */
+    async clearCache() {
+        this.categories.clear();
+        this.initialized = false;
+        console.log('✅ Cache de dados limpo com sucesso');
     }
 }
 

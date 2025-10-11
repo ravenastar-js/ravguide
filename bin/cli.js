@@ -11,8 +11,9 @@ const fs = require('fs');
 const path = require('path');
 
 /**
- * 🔍 Verifica se Node.js está instalado
- * @returns {boolean} true se Node.js está disponível
+ * 🔍 Verifica se Node.js está instalado no sistema
+ * @returns {boolean} 📊 true se Node.js está disponível, false caso contrário
+ * @throws {Error} 🚨 Se não conseguir executar o comando de verificação
  */
 function checkNodeJS() {
     try {
@@ -24,8 +25,9 @@ function checkNodeJS() {
 }
 
 /**
- * 📦 Verifica se dependências estão instaladas
- * @returns {boolean} true se todas as dependências estão presentes
+ * 📦 Verifica se todas as dependências do projeto estão instaladas
+ * @returns {boolean} 📊 true se todas as dependências estão presentes
+ * @throws {Error} 🚨 Se houver erro ao ler package.json ou node_modules
  */
 function checkDependencies() {
     const nodeModulesPath = path.join(__dirname, '..', 'node_modules');
@@ -45,16 +47,17 @@ function checkDependencies() {
 }
 
 /**
- * 📁 Verifica se diretório data existe
- * @returns {boolean} true se diretório data existe
+ * 📁 Verifica se o diretório data existe
+ * @returns {boolean} 📊 true se diretório data existe
  */
 function checkDataDirectory() {
     return fs.existsSync(path.join(__dirname, '..', 'data'));
 }
 
 /**
- * ⚡ Instala dependências automaticamente
- * @returns {boolean} true se instalação foi bem-sucedida
+ * ⚡ Instala dependências automaticamente usando npm install
+ * @returns {boolean} 📊 true se instalação foi bem-sucedida
+ * @throws {Error} 🚨 Se o comando npm install falhar
  */
 function installDependencies() {
     console.log('📦 Instalando dependências automaticamente...');
@@ -73,6 +76,7 @@ function installDependencies() {
 
 /**
  * 🗂️ Cria diretório data se não existir
+ * @returns {void} 📤 Não retorna valor
  */
 function createDataDirectory() {
     const dataDir = path.join(__dirname, '..', 'data');
@@ -83,8 +87,8 @@ function createDataDirectory() {
 }
 
 /**
- * 🌐 Configura instalação global
- * @returns {boolean} true se configuração foi bem-sucedida
+ * 🌐 Configura instalação global do CLI usando npm link
+ * @returns {boolean} 📊 true se configuração foi bem-sucedida
  */
 function setupGlobalInstall() {
     try {
@@ -102,12 +106,14 @@ function setupGlobalInstall() {
 }
 
 /**
- * 🔄 Configuração automática do ambiente
+ * 🔄 Configuração automática do ambiente - Verifica e instala dependências necessárias
+ * @returns {void} 📤 Não retorna valor
+ * @throws {Error} 🚨 Se houver falha crítica na configuração
  */
 function autoSetup() {
     console.log('🔍 Verificando ambiente...');
 
-    // 🛑 Verifica Node.js
+    // 🛑 Verifica Node.js (requisito fundamental)
     if (!checkNodeJS()) {
         console.log('\n❌ Node.js não encontrado!');
         console.log('📥 Baixe e instale Node.js em: https://nodejs.org');
@@ -136,8 +142,11 @@ function autoSetup() {
 }
 
 /**
- * 📊 Verifica arquivos de dados disponíveis
- * @returns {Object} Status dos arquivos de dados
+ * 📊 Verifica arquivos de dados disponíveis na pasta data
+ * @returns {Object} 📋 Objeto com status dos arquivos de dados
+ * @property {boolean} hasFiles - Se existem arquivos disponíveis
+ * @property {number} count - Quantidade de categorias disponíveis
+ * @property {string[]} categories - Lista de categorias encontradas
  */
 function checkDataFiles() {
     const dataDir = path.join(__dirname, '..', 'data');
@@ -185,7 +194,8 @@ function checkDataFiles() {
 }
 
 /**
- * 📋 Mostra status dos arquivos de dados
+ * 📋 Mostra status dos arquivos de dados no console
+ * @returns {void} 📤 Não retorna valor
  */
 function showDataStatus() {
     const dataStatus = checkDataFiles();
@@ -203,11 +213,11 @@ function showDataStatus() {
     }
 }
 
-// 🚀 EXECUÇÃO PRINCIPAL
+// 🚀 EXECUÇÃO PRINCIPAL DO SCRIPT
 autoSetup();
 const dataStatus = checkDataFiles();
 
-// 📥 Carrega módulos principais
+// 📥 Carrega módulos principais da aplicação
 const { main } = require('../src/index.js');
 const args = process.argv.slice(2);
 
@@ -216,7 +226,10 @@ if (args.length > 0) {
     const command = args[0].toLowerCase();
     const commands = require('../src/commands.js');
 
-    // 🔧 Comandos especiais
+    /**
+     * 🔧 Comandos especiais disponíveis via CLI
+     * @type {Object.<string, Function>}
+     */
     const specialCommands = {
         'setup': () => {
             console.log('✅ O sistema já está configurado automaticamente!');
@@ -271,7 +284,7 @@ if (args.length > 0) {
         commands.executeDirectCommand(command);
     }
 } else {
-    // 📱 Modo interativo
+    // 📱 Modo interativo - Executa interface principal
     if (!dataStatus.hasFiles) {
         console.log('💡 Use: ravguide <categoria> para comandos diretos');
         console.log('   Exemplo: ravguide FAQ\n');
