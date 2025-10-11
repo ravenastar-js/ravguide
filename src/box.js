@@ -177,49 +177,90 @@ function displayHeader() {
  * @returns {string} 📝 Texto quebrado em múltiplas linhas
  */
 function wrapTextIntelligent(text, maxWidth) {
-    if (!text || typeof text !== 'string') return '';
-    if (text.length <= maxWidth) return text;
+    if (!text || text.length <= maxWidth) return text;
+
+    const segments = [];
+    let lastIndex = 0;
+
+    const urlRegex = /(https?:\/\/[^\s<]+[^\s<.)])/g;
+    let match;
+
+    while ((match = urlRegex.exec(text)) !== null) {
+        if (match.index > lastIndex) {
+            segments.push({
+                type: 'text',
+                content: text.substring(lastIndex, match.index)
+            });
+        }
+
+        segments.push({
+            type: 'url',
+            content: match[0]
+        });
+        lastIndex = urlRegex.lastIndex;
+    }
+
+    if (lastIndex < text.length) {
+        segments.push({
+            type: 'text',
+            content: text.substring(lastIndex)
+        });
+    }
+
+    if (segments.length === 0) {
+        segments.push({
+            type: 'text',
+            content: text
+        });
+    }
 
     const lines = [];
     let currentLine = '';
-    const words = text.split(' ');
 
-    for (let i = 0; i < words.length; i++) {
-        const word = words[i];
+    segments.forEach(segment => {
+        if (segment.type === 'url') {
+            const urlWithColor = colors.link.underline(segment.content);
 
-        // 🎯 Se a palavra é muito longa, quebra ela
-        if (word.length > maxWidth) {
-            // Se já tem conteúdo na linha atual, salva primeiro
-            if (currentLine) {
-                lines.push(currentLine.trim());
-                currentLine = '';
+            if ((currentLine.length + segment.content.length) <= maxWidth) {
+                currentLine += (currentLine ? ' ' : '') + urlWithColor;
+            } else {
+                if (currentLine) {
+                    lines.push(currentLine);
+                }
+                currentLine = urlWithColor;
             }
-
-            // Quebra a palavra longa
-            for (let j = 0; j < word.length; j += maxWidth) {
-                const chunk = word.substring(j, j + maxWidth);
-                if (chunk) lines.push(chunk);
-            }
-            continue;
-        }
-
-        // 🎯 Testa se a palavra cabe na linha atual
-        const testLine = currentLine ? `${currentLine} ${word}` : word;
-
-        if (testLine.length <= maxWidth) {
-            currentLine = testLine;
         } else {
-            // Não cabe, salva a linha atual e começa nova
-            if (currentLine) {
-                lines.push(currentLine.trim());
-            }
-            currentLine = word;
-        }
-    }
+            const words = segment.content.trim().split(/\s+/);
 
-    // 🎯 Adiciona a última linha se houver conteúdo
+            words.forEach(word => {
+                const plainWord = word.replace(/\u001b\[[0-9;]*m/g, '');
+
+                if (plainWord.length > maxWidth) {
+                    if (currentLine) {
+                        lines.push(currentLine);
+                        currentLine = '';
+                    }
+                    for (let i = 0; i < plainWord.length; i += maxWidth) {
+                        lines.push(plainWord.substring(i, i + maxWidth));
+                    }
+                } else {
+                    const currentLinePlain = currentLine.replace(/\u001b\[[0-9;]*m/g, '');
+
+                    if ((currentLinePlain.length + plainWord.length + 1) <= maxWidth) {
+                        currentLine += (currentLine ? ' ' : '') + word;
+                    } else {
+                        if (currentLine) {
+                            lines.push(currentLine);
+                        }
+                        currentLine = word;
+                    }
+                }
+            });
+        }
+    });
+
     if (currentLine) {
-        lines.push(currentLine.trim());
+        lines.push(currentLine);
     }
 
     return lines.join('\n');
@@ -280,19 +321,18 @@ function createSimpleContentBox(title, content) {
     let contentText = '';
 
     if (typeof content === 'string') {
-        contentText = formatUrlsInText(content);
+        contentText = content;
     } else {
         contentText = String(content);
     }
 
-    // 🎯 Quebrar texto inteligentemente
     const wrappedContent = wrapTextIntelligent(contentText, width - 8);
 
     const boxContent = [
         colors.title.bold(`📖 ${title}`),
         colors.muted('─'.repeat(width - 12)),
         '',
-        colors.text(wrappedContent)
+        wrappedContent
     ].join('\n');
 
     return boxen(boxContent, {
