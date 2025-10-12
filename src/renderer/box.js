@@ -27,7 +27,7 @@ const colors = {
 
 function getVersion() {
     try {
-        const packagePath = join(__dirname, '..', 'package.json');
+        const packagePath = join(__dirname, '..', '..', 'package.json');
         return JSON.parse(readFileSync(packagePath, 'utf8')).version || 'BETA';
     } catch (error) {
         return 'BETA';
