@@ -122,15 +122,22 @@ ravguide check
 ```
 📁 ravguide/
 ├── 📦 package.json
-├── ⚙️ bin/
+├── ⚙️ config.json
+├── 🔧 bin/
 │   └── 🖥️ cli.js
 ├── 📚 src/
-│   ├── 🎨 box.js
-│   ├── 🎯 commands.js
-│   ├── 📥 data-loader.js
-│   ├── 🏠 index.js
-│   ├── 📱 menu.js
-│   └── 🎨 renderer.js
+│   ├── 🎨 config/
+│   │   └── colors.js
+│   ├── 📥 data/
+│   │   └── loader.js
+│   ├── 🖼️ renderer/
+│   │   ├── box.js
+│   │   └── menu.js
+│   ├── 🎮 menu/
+│   │   └── main.js
+│   ├── 🎯 commands/
+│   │   └── index.js
+│   └── 🏠 index.js
 ├── 🗃️ data/
 │   ├── 🛠️ ferramentas.json
 │   ├── 🔐 ig-hackeado.json
@@ -149,3 +156,15 @@ Se precisar de ajuda ou quiser falar com a equipe, entre no nosso servidor de su
 ---
 
 **✨ Feito com 💚 por 🔗 [RavenaStar](https://ravenastar.link)**  
+
+---
+
+## Star History
+
+<a href="https://www.star-history.com/#ravenastar-js/ravguide&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=ravenastar-js/ravguide&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=ravenastar-js/ravguide&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=ravenastar-js/ravguide&type=Date" />
+ </picture>
+</a>

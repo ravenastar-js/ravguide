@@ -1,0 +1,31 @@
+{
+  "colors": {
+    "primary": "#06D6A0",
+    "secondary": "#FFD166",
+    "success": "#57f287",
+    "danger": "#EF476F",
+    "info": "#118AB2",
+    "warning": "#F18F01",
+    "muted": "#7F8C8D",
+    "text": "#E9ECEF",
+    "background": "#1a1a1a",
+    "border": "#57f287"
+  },
+  "ui": {
+    "mobileMaxWidth": 60,
+    "desktopMaxWidth": 100,
+    "mobilePageSize": 8,
+    "desktopPageSize": 12,
+    "padding": 1,
+    "margin": 1
+  },
+  "urls": {
+    "website": "https://ravenastar.link",
+    "guide": "https://secguide.pages.dev",
+    "tools": "https://secguide.pages.dev/r/"
+  },
+  "remote": {
+    "platforms": "https://raw.githubusercontent.com/ravenastar-js/gd/refs/heads/main/report.json",
+    "tools": "https://secguide.pages.dev/js/data-tools.js"
+  }
+}

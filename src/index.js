@@ -1,18 +1,18 @@
-/**
- * 🏠 Ponto de Entrada Principal
- * 🎯 Inicializa e executa a aplicação ravguide
- */
-
-const { showMainMenu } = require('./menu.js');
-const { displayHeader } = require('./renderer.js');
+const mainMenu = require('./menu/main');
+const boxRenderer = require('./renderer/box');
 
 /**
- * 🚀 Função principal da aplicação
- * @returns {void}
+ * 🚀 Função principal que inicia a aplicação
+ * @returns {void} 📺 Exibe interface e gerencia fluxo principal
  */
 function main() {
-    displayHeader();
-    showMainMenu();
+    boxRenderer.displayHeader();
+    mainMenu.initialize()
+        .then(() => mainMenu.showMainMenu())
+        .catch(error => {
+            console.error('❌ Erro fatal:', error.message);
+            process.exit(1);
+        });
 }
 
 module.exports = { main };
