@@ -1,3 +1,21 @@
+> [!WARNING]  
+> Esse projeto aceita contribuições com muito carinho 💚, mas é essencial seguir algumas regras:  
+> ```
+> • 🚫 Não altere a lógica, o propósito ou a essência do projeto.  
+> • 🗂️ Melhorias na estrutura de arquivos são bem-vindas, desde que não comprometam o funcionamento principal do projeto.  
+> • 🎨 Contribuições no sistema de gerenciamento de cores (menus, opções, temas etc.) são permitidas e incentivadas!  
+> • 📦 Os padrões visuais definidos com "boxen" e "chalk" devem ser mantidos nos quadros dos menus:  
+>   • Bordas verdes  
+>   • Fundo cinza escuro  
+>   • Links em azul claro  
+>   • Outros estilos previamente definidos  
+>   As modificações ideais devem se restringir ao sistema de cores do menu interativo e afins. 
+> ```
+> > Todas as alterações que não seguirem as regras serão recusadas.
+
+---
+
+
 <div align="center">
 
 <a href="https://www.npmjs.com/package/ravguide" target="_blank"><img src="https://img.shields.io/badge/-ravguide-c40404?style=flat-square&labelColor=c40404&logo=npm&logoColor=white&link=https://www.npmjs.com/package/ravguide" height="40" /></a>  
