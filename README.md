@@ -9,7 +9,7 @@
 >   • Fundo cinza escuro  
 >   • Links em azul claro  
 >   • Outros estilos previamente definidos  
->   As modificações ideais devem se restringir ao sistema de cores do menu interativo e afins. 
+>  💡 As modificações ideais devem se restringir ao sistema de cores do menu interativo e afins. 
 > ```
 > > Todas as alterações que não seguirem as regras serão recusadas.
 
@@ -23,7 +23,7 @@
 
 ---
 
-# 🔒 SECGUIDE
+# 🔒 RAVGUIDE
 ### 📖 Guia de segurança digital modular e interativo via CLI/NPM
 
 [![⭐ Stars](https://img.shields.io/github/stars/ravenastar-js/ravguide?style=for-the-badge&label=%E2%AD%90%20Stars&color=2d7445&logo=star&logoColor=white&labelColor=444&radius=10)](https://github.com/ravenastar-js/ravguide/stargazers)
