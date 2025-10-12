@@ -2,6 +2,7 @@ const boxen = require('boxen');
 const figlet = require('figlet');
 const chalk = require('chalk');
 const { readFileSync } = require('fs');
+const { join } = require('path');
 
 const colors = {
     primary: chalk.hex("#06D6A0"),
