@@ -318,7 +318,7 @@ class MainMenu {
             if (selectedTool === 'back') return this.showToolsSubmenu(allToolsData, mainCategory);
 
             const toolLink = selectedTool.link && selectedTool.id
-                ? `${selectedTool.link}${selectedTool.id}`
+                ? `${selectedTool.link}`
                 : selectedTool.link || 'Link não disponível';
 
             const toolInfo = `🔗 ${toolLink}\n\n📁 ID: ${selectedTool.id || 'N/A'}`;
