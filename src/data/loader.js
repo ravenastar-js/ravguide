@@ -125,9 +125,11 @@ class DataLoader {
         const categoryMap = {
             'scan': '🔍 Ferramentas de Scan',
             'sec': '🛡️ Segurança',
-            'ex': '🛠️ Utilitários',
             'jus': '⚖️ Jurídico',
             'google': '🔎 Google',
+            'educa': '🎓 Educacionais', 
+            'gbtools': '⚙️ Github Tools', 
+            'ex': '✨ Extras', 
             'dados': '📊 Verificação de Dados',
             'gov': '🏛️ Governo',
             'denuncie': '🚨 Denúncia'
@@ -142,8 +144,9 @@ class DataLoader {
      */
     getToolEmoji(category) {
         const emojiMap = {
-            'scan': '🔍', 'sec': '🛡️', 'ex': '🛠️', 'jus': '⚖️',
-            'google': '🔎', 'dados': '📊', 'gov': '🏛️', 'denuncie': '🚨'
+            'scan': '🔍', 'sec': '🛡️', 'ex': '✨ ', 'jus': '⚖️',
+            'google': '🔎', 'dados': '📊', 'gov': '🏛️', 'denuncie': '🚨', 
+            'gbtools': '⚙️','educa': '🎓',
         };
         return emojiMap[category] || '📋';
     }
