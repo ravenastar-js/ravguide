@@ -1,6 +1,6 @@
 {
   "name": "ravguide",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "📖 Guia de segurança digital modular e interativo via CLI/NPM",
   "main": "src/index.js",
   "bin": {
