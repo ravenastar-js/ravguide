@@ -159,12 +159,12 @@ Se precisar de ajuda ou quiser falar com a equipe, entre no nosso servidor de su
 
 ---
 
-## Star History
+## 🌟 Star History
 
-<a href="https://www.star-history.com/#ravenastar-js/ravguide&Date">
+<a href="https://www.star-history.com/?repos=ravenastar-js%2Fravguide&type=date&legend=top-left">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=ravenastar-js/ravguide&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=ravenastar-js/ravguide&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=ravenastar-js/ravguide&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=ravenastar-js/ravguide&type=date&theme=dark&legend=top-left&sealed_token=GhLcu-uqvPBLuLkkpa9imcg7sEprGUYC0m_MxNtI7G3wF9yP-8RYrqYxcmcegAxAZGWqTgcc6gTJ2lIMDd4amIa4dcgTRcev0DrRYJA32BP0aUqkRAegSw" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=ravenastar-js/ravguide&type=date&legend=top-left&sealed_token=GhLcu-uqvPBLuLkkpa9imcg7sEprGUYC0m_MxNtI7G3wF9yP-8RYrqYxcmcegAxAZGWqTgcc6gTJ2lIMDd4amIa4dcgTRcev0DrRYJA32BP0aUqkRAegSw" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=ravenastar-js/ravguide&type=date&legend=top-left&sealed_token=GhLcu-uqvPBLuLkkpa9imcg7sEprGUYC0m_MxNtI7G3wF9yP-8RYrqYxcmcegAxAZGWqTgcc6gTJ2lIMDd4amIa4dcgTRcev0DrRYJA32BP0aUqkRAegSw" />
  </picture>
 </a>
